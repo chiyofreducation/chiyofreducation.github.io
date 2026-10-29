@@ -1680,10 +1680,13 @@ function suivant(j) {
   const cibles = (Array.isArray(it.c) ? it.c : [it.c]).filter(Boolean);
   cibles.forEach(c => c.classList.add("parle"));
   const spans = cibles.map(mots);
-  const grp = groupes(it.k, cibles.length, it.coupes);
   const W = MOTS[it.k] || [];
   const ou = new Map();   // index du mot prononcé -> mot affiché
-  grp.forEach((g, gi) => aligner(W, g, spans[gi] || []).forEach((s, wi) => ou.set(wi, s)));
+  if (!it.coupes && spans.length > 1)
+    // plusieurs zones (question + choix) : alignement d’un seul tenant, mot à mot
+    aligner(W, W.map((_, i) => i), spans.flat()).forEach((s, wi) => ou.set(wi, s));
+  else
+    groupes(it.k, cibles.length, it.coupes).forEach((g, gi) => aligner(W, g, spans[gi] || []).forEach((s, wi) => ou.set(wi, s)));
   jouer(it.k, j, moi);
   let dernier = null;
   const boucle = () => {
