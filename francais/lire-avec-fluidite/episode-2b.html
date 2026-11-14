@@ -790,6 +790,28 @@ input[type=text]:focus{border-color:var(--bleu);box-shadow:0 0 0 3px color-mix(i
 .actions-lec{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
 audio.moi{display:block;width:100%;margin:10px 0}
 </style>
+<style id="audit-2026-11">:root[data-theme="dark"] .cumul{color:#ff8a78}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cumul{color:#ff8a78}}
+h1{font-size:clamp(1.8rem,5.5vw,2.6rem);line-height:1.1}
+
+/* Corrections audit accessibilite (nov. 2026) */
+.retour,.theme-btn{min-height:44px;min-width:44px;justify-content:center}
+.lien-yt{min-height:44px}
+
+/* En-tete compact pendant l'activite */
+body:has(#intro[hidden]) header.top .top-in{padding:62px 20px 14px;gap:2px}
+body:has(#intro[hidden]) header.top .logo{display:none !important}
+body:has(#intro[hidden]) header.top .kicker{font-size:.82rem}
+body:has(#intro[hidden]) header.top h1{font-size:clamp(1.3rem,3.4vw,1.75rem);line-height:1.15;letter-spacing:-.01em}
+body:has(#intro[hidden]) header.top .lien-yt{margin-top:6px}
+@media (max-width:520px){body:has(#intro[hidden]) header.top .top-in{padding:12px 62px 12px}}
+/* Reperes de progression : zone a toucher plus haute */
+.steps a{position:relative}
+.steps a::after{content:"";position:absolute;left:-3px;right:-3px;top:-18px;bottom:-18px}
+/* Mot lu dans une correction : texte fonce lisible */
+.fb .w.on,.fb .w.on *{color:var(--ink) !important}
+.outils .btn{min-height:44px}
+.fb .w{transition:none !important}
+</style>
 </head>
 <body>
 <header class="top">
