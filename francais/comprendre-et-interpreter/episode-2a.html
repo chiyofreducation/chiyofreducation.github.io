@@ -873,14 +873,35 @@ audio.moi{display:block;width:100%;margin:10px 0}
 @keyframes clignote{50%{opacity:.25}}
 @media (prefers-reduced-motion: reduce){.ecouter.joue::after{animation:none}}
 .barre-liste{margin:0;padding:0;list-style:none}
-.barre-liste li{padding:9px 12px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:1.05rem;transition:opacity .5s,max-height .6s,margin .6s,padding .6s;max-height:120px;overflow:hidden}
-.barre-liste li:hover:not(.barree):not(.fini){background:var(--chip)}
-.barre-liste li.barree{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--ko);color:var(--muted);background:var(--sand);cursor:default}
-.barre-liste li.essai{animation:secoue .45s}
+.barre-liste .bl{padding:9px 12px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:1.05rem;transition:opacity .5s,max-height .6s,margin .6s,padding .6s;max-height:120px;overflow:hidden}
+.barre-liste .bl:hover:not(.barree):not(.fini){background:var(--chip)}
+.barre-liste .bl.barree{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--ko);color:var(--muted);background:var(--sand);cursor:default}
+.barre-liste .bl.essai{animation:secoue .45s}
 @keyframes secoue{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.barre-liste li.cache{opacity:0;max-height:0;margin:0;padding:0 12px;border-width:0}
-.barre-liste li.fini{border-color:var(--ok);background:var(--ok-bg);cursor:default}
+.barre-liste .bl.cache{opacity:0;max-height:0;margin:0;padding:0 12px;border-width:0}
+.barre-liste .bl.fini{border-color:var(--ok);background:var(--ok-bg);cursor:default}
 .resume-titre{font-weight:900;color:var(--ok);margin:10px 0 0}
+</style>
+<style id="audit-2026-11">h1{font-size:clamp(1.8rem,5.5vw,2.6rem);line-height:1.1}
+
+/* Corrections audit accessibilite (nov. 2026) */
+.retour,.theme-btn{min-height:44px;min-width:44px;justify-content:center}
+.lien-yt{min-height:44px}
+
+/* En-tete compact pendant l'activite */
+body:has(#intro[hidden]) header.top .top-in{padding:62px 20px 14px;gap:2px}
+body:has(#intro[hidden]) header.top .logo{display:none !important}
+body:has(#intro[hidden]) header.top .kicker{font-size:.82rem}
+body:has(#intro[hidden]) header.top h1{font-size:clamp(1.3rem,3.4vw,1.75rem);line-height:1.15;letter-spacing:-.01em}
+body:has(#intro[hidden]) header.top .lien-yt{margin-top:6px}
+@media (max-width:520px){body:has(#intro[hidden]) header.top .top-in{padding:12px 62px 12px}}
+/* Reperes de progression : zone a toucher plus haute */
+.steps a{position:relative}
+.steps a::after{content:"";position:absolute;left:-3px;right:-3px;top:-18px;bottom:-18px}
+/* Mot lu dans une correction : texte fonce lisible */
+.fb .w.on,.fb .w.on *{color:var(--ink) !important}
+.outils .btn{min-height:44px}
+.fb .w{transition:none !important}
 </style>
 </head>
 <body>
@@ -1179,8 +1200,8 @@ const BAR = [{ t: "Au printemps, Lina part dans la forêt.", k: "b1" }, { t: "El
 function buildDD() {
   const box = $("#dd"); box.innerHTML = "";
   const ecouter = el("button", "btn alt ecouter", "🔊 Écouter le résumé"); ecouter.type = "button";
-  const carte = el("div", "texte-ex"); const ul = el("ul", "barre-liste");
-  const lis = BAR.map(b => { const li = el("li", "", b.t); li._b = b; li.setAttribute("role", "button"); li.tabIndex = 0;
+  const carte = el("div", "texte-ex"); const ul = el("div", "barre-liste");
+  const lis = BAR.map(b => { const li = el("div", "bl", b.t); li._b = b; li.setAttribute("role", "button"); li.tabIndex = 0;
     li.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); li.click(); } }); ul.append(li); return li; });
   const titreRes = el("p", "resume-titre", "Voilà le résumé :"); titreRes.hidden = true;
   carte.append(ul, titreRes);
