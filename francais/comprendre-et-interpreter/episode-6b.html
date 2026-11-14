@@ -902,6 +902,29 @@ audio.moi{display:block;width:100%;margin:10px 0}
 <style>@media (hover: none){.opt:hover:not([disabled]){border-color:var(--chip-line);background:var(--paper)}}.opt.choisi,.opt.choisi:hover{border-color:#8250df!important;background:color-mix(in srgb,#8250df 12%,var(--paper))!important;font-weight:800}.opt.choisi::before{background:#8250df;border-color:#8250df;content:"✓";color:#fff;font-size:14px;font-weight:900;display:grid;place-items:center}.opt.right{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok)!important}.opt.wrong{background:var(--ko-bg)!important;border-color:var(--ko)!important;color:var(--ko)!important}.btn.valider{margin:8px 0 4px}#dd .q-t{margin-top:22px}</style>
 <style>.texte-lina.poeme .grp{display:inline-block!important;max-width:100%}</style>
 <style>.rappel{border:2px solid #8250df;background:color-mix(in srgb,#8250df 8%,var(--paper));border-radius:14px;padding:10px 14px;margin:10px 0 14px}.rappel-titre{margin:0 0 6px;font-weight:900;color:#8250df}.rappel-liste{margin:0;padding-left:18px;line-height:1.55}.rappel-liste li{margin:2px 0}</style>
+<style id="audit-2026-11">h1{font-size:clamp(1.8rem,5.5vw,2.6rem);line-height:1.1}
+
+/* Corrections audit accessibilite (nov. 2026) */
+.retour,.theme-btn{min-height:44px;min-width:44px;justify-content:center}
+.lien-yt{min-height:44px}
+
+/* En-tete compact pendant l'activite */
+body:has(#intro[hidden]) header.top .top-in{padding:62px 20px 14px;gap:2px}
+body:has(#intro[hidden]) header.top .logo{display:none !important}
+body:has(#intro[hidden]) header.top .kicker{font-size:.82rem}
+body:has(#intro[hidden]) header.top h1{font-size:clamp(1.3rem,3.4vw,1.75rem);line-height:1.15;letter-spacing:-.01em}
+body:has(#intro[hidden]) header.top .lien-yt{margin-top:6px}
+@media (max-width:520px){body:has(#intro[hidden]) header.top .top-in{padding:12px 62px 12px}}
+/* Reperes de progression : zone a toucher plus haute */
+.steps a{position:relative}
+.steps a::after{content:"";position:absolute;left:-3px;right:-3px;top:-18px;bottom:-18px}
+/* Mot lu dans une correction : texte fonce lisible */
+.fb .w.on,.fb .w.on *{color:var(--ink) !important}
+.outils .btn{min-height:44px}
+.fb .w{transition:none !important}
+:root[data-theme="dark"] .rappel-titre{color:#b392f0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .rappel-titre{color:#b392f0}}
+</style>
 </head>
 <body>
 <header class="top">
